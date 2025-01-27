@@ -1,0 +1,3 @@
+[submodule "EE5333_tutorials"]
+	path = EE5333_tutorials
+	url = git@github.com:srini229/EE5333_tutorials.git
