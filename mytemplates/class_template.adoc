@@ -1,0 +1,48 @@
+= EE5333: Class Title Here
+:toc:
+:toc-title: Contents
+:source-highlighter: rouge
+
+== Class Information
+* *Date*: YYYY-MM-DD
+* *Topic*: Main topic of the class
+* *Keywords*: keyword1, keyword2, keyword3
+
+== Key Concepts Covered
+* Concept 1
+** Sub-point
+** Sub-point
+* Concept 2
+* Concept 3
+
+== Important Equations/Formulas
+[stem]
+++++
+y = mx + c
+++++
+
+== Code Examples
+[source,python]
+----
+def example():
+    print("Hello World")
+----
+
+== Practical Applications
+* Application 1
+* Application 2
+
+== Assignments/Homework
+* [ ] Task 1
+* [ ] Task 2
+
+== References
+* Reference 1
+* Reference 2
+
+== Notes and Additional Comments
+Any additional notes or observations from the class can go here.
+
+== Questions for Follow-up
+* Question 1?
+* Question 2?
