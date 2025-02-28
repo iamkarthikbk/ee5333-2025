@@ -5,9 +5,54 @@
 # Author: ee24s053 Karthik B K
 # Date: 26 February 2025
 #
-# For now, this is simply the code provided with the problem statement.
-# The solution will not be pushed here until 24 hours after the submission
-# deadline as it appears on Moodle.
+# Program Overview:
+# This implementation presents a Sequence Pair Floorplanner that optimizes module placement
+# in VLSI design using simulated annealing. The program flows as follows:
+#
+# 1. Module Representation:
+#    - Each module has a name, area, and set of possible aspect ratios
+#    - Width and height are derived from area and aspect ratio through square root calculations
+#    - Multiple aspect ratio options allow for flexible module shapes
+#
+# 2. Sequence Pair Representation:
+#    - Two permutations (positive and negative sequences) encode relative positions
+#    - Horizontal constraints: derived from positive and negative sequence relationships
+#    - Vertical constraints: similarly derived but with different traversal order
+#    - Additional data includes aspect ratio choices and coordinates for each module
+#
+# 3. Perturbation Strategy:
+#    - Three move types with equal probability (random.randint(0,2)):
+#      a. M0: Swap two blocks in positive sequence only (changes relative position)
+#      b. M1: Swap two blocks in both sequences (more dramatic positional change)
+#      c. M2: Change aspect ratio of a random module (adjusts shape, not position)
+#
+# 4. Cost Evaluation:
+#    - Builds horizontal and vertical constraint graphs
+#    - Calculates valid module coordinates through constraint propagation
+#    - Cost function is the total bounding box area (width × height)
+#
+# 5. Optimization Algorithm:
+#    - Simulated annealing with exponential cooling schedule (T *= alpha)
+#    - Acceptance probability: exp(-deltaCost/temperature) for uphill moves
+#    - Always accepts moves that improve the solution (decrease area)
+#    - Maintains best solution found during the entire process
+#
+# Assumptions and Constants:
+#    - Initial temperature (Tmax) = sum of all module areas
+#    - Final temperature (Tmin) = 1
+#    - Inner loop iterations (N) = 100
+#    - Cooling rate (alpha) = 0.9
+#    - Aspect ratio selection is uniformly random among available options
+#    - All modules must be placed without overlap
+#    - No fixed positions or pre-placed modules are considered
+#    - No routing space is reserved between modules
+#    - No I/O pad placement is considered
+#
+# The algorithm iteratively improves module placement through controlled random exploration,
+# balancing between exploration (accepting suboptimal solutions) and exploitation 
+# (refining the current best solution) by gradually decreasing temperature.
+#
+# I will check this code in publicly on GitHub a day after the submission deadline.
 #
 ###############################################################################
 
@@ -156,33 +201,35 @@ def sp_floorplan(modules, ARmin, ARmax):
                for mod_idx in range(len(modules))]
     return (solution, min_area)
 
-def plot(coords):
-    import matplotlib.pyplot as plt
-    from matplotlib.patches import Rectangle
-    fig, ax = plt.subplots()
-    ax.plot([0, 0])
-    ax.set_aspect('equal')
-    ax.set_xlim(0,max([rect[0][0] + rect[1][0] for rect in coords]))
-    ax.set_ylim(0,max([rect[0][1] + rect[1][1] for rect in coords]))
-    for idx, rect in enumerate(coords):
-        if idx%4 == 3:
-            hatch_pattern, color = '/+', 'red'
-        elif idx%4 == 2:
-            hatch_pattern, color = '///', 'green'
-        elif idx%4 == 1:
-            hatch_pattern, color = '\\\\\\', 'blue'
-        else:
-            hatch_pattern, color = 'o', 'black'
-        ax.add_patch(Rectangle(rect[0], rect[1][0], rect[1][1], hatch=hatch_pattern, facecolor='white', fill=True, 
-                            edgecolor=color, linewidth=3, label=rect[2]))
-        ax.text(rect[0][0]+rect[1][0]/2, rect[0][1]+rect[1][1]/2, rect[2])
-    plt.show()
-    return (fig, ax)
+# def plot(coords):
+#     import matplotlib.pyplot as plt
+#     from matplotlib.patches import Rectangle
+#     fig, ax = plt.subplots()
+#     ax.plot([0, 0])
+#     ax.set_aspect('equal')
+#     ax.set_xlim(0,max([rect[0][0] + rect[1][0] for rect in coords]))
+#     ax.set_ylim(0,max([rect[0][1] + rect[1][1] for rect in coords]))
+#     for idx, rect in enumerate(coords):
+#         if idx%4 == 3:
+#             hatch_pattern, color = '/+', 'red'
+#         elif idx%4 == 2:
+#             hatch_pattern, color = '///', 'green'
+#         elif idx%4 == 1:
+#             hatch_pattern, color = '\\\\\\', 'blue'
+#         else:
+#             hatch_pattern, color = 'o', 'black'
+#         ax.add_patch(Rectangle(rect[0], rect[1][0], rect[1][1], hatch=hatch_pattern, facecolor='white', fill=True, 
+#                             edgecolor=color, linewidth=3, label=rect[2]))
+#         ax.text(rect[0][0]+rect[1][0]/2, rect[0][1]+rect[1][1]/2, rect[2])
+#     plt.show()
+#     return (fig, ax)
 
 modules = [Module('a', 16, [0.25, 4]), Module('b', 32, [2.0, 0.5]), Module('c', 27, [1./3, 3.]), Module('d', 6, [6])]
 solution, area = sp_floorplan(modules, 0.75, 1.33)
-plot(solution)
+print(f'Solution: {solution}, Area: {area}')
+# plot(solution)
 
 modules = [Module(str(i), random.randint(10,100), [1.]) for i in range(10)]
 solution, area = sp_floorplan(modules, 0.5, 2)
-plot(solution)
+print(f'Solution: {solution}, Area: {area}')
+# plot(solution)
