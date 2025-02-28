@@ -201,6 +201,9 @@ def sp_floorplan(modules, ARmin, ARmax):
                for mod_idx in range(len(modules))]
     return (solution, min_area)
 
+# # Uncomment all the lines below including this one to enable manual testing
+# # =========================================================================
+
 # def plot(coords):
 #     import matplotlib.pyplot as plt
 #     from matplotlib.patches import Rectangle
@@ -224,12 +227,12 @@ def sp_floorplan(modules, ARmin, ARmax):
 #     plt.show()
 #     return (fig, ax)
 
-modules = [Module('a', 16, [0.25, 4]), Module('b', 32, [2.0, 0.5]), Module('c', 27, [1./3, 3.]), Module('d', 6, [6])]
-solution, area = sp_floorplan(modules, 0.75, 1.33)
-print(f'Solution: {solution}, Area: {area}')
+# modules = [Module('a', 16, [0.25, 4]), Module('b', 32, [2.0, 0.5]), Module('c', 27, [1./3, 3.]), Module('d', 6, [6])]
+# solution, area = sp_floorplan(modules, 0.75, 1.33)
+# print(f'Solution: {solution}, Area: {area}')
 # plot(solution)
 
-modules = [Module(str(i), random.randint(10,100), [1.]) for i in range(10)]
-solution, area = sp_floorplan(modules, 0.5, 2)
-print(f'Solution: {solution}, Area: {area}')
+# modules = [Module(str(i), random.randint(10,100), [1.]) for i in range(10)]
+# solution, area = sp_floorplan(modules, 0.5, 2)
+# print(f'Solution: {solution}, Area: {area}')
 # plot(solution)
