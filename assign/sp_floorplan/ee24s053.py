@@ -119,7 +119,7 @@ class SeqPair:
         
         return new_seq_pair
 
-    def costEval(self, modules):
+    def costEval(self, modules, ARmin=0.9, ARmax=1.1):
         num_modules = len(modules)
         self._coordinates = [(0,0) for _ in range(num_modules)]
         
@@ -157,7 +157,23 @@ class SeqPair:
         self._bounding_box_width = max(x_coord + modules[mod_idx]._width_height[self._aspect_ratio_choice[mod_idx]][0] for mod_idx, (x_coord, _) in enumerate(self._coordinates))
         self._bounding_box_height = max(y_coord + modules[mod_idx]._width_height[self._aspect_ratio_choice[mod_idx]][1] for mod_idx, (_, y_coord) in enumerate(self._coordinates))
         
-        return self._bounding_box_width * self._bounding_box_height
+        # Base cost is the area
+        area = self._bounding_box_width * self._bounding_box_height
+        
+        # Aspect ratio is W by H
+        aspect_ratio = self._bounding_box_width / self._bounding_box_height
+        
+        # A quadratic penalty function to penalize the hell out of the annealer
+        aspect_ratio_penalty = 0
+        if aspect_ratio < ARmin:
+            aspect_ratio_penalty = 1000 * (ARmin - aspect_ratio)**2 * area
+        elif aspect_ratio > ARmax:
+            aspect_ratio_penalty = 1000 * (aspect_ratio - ARmax)**2 * area
+            
+        # Super high weights for aspect ratio penalty to ensure it is met.
+        total_cost = area + aspect_ratio_penalty
+        
+        return total_cost
 
 def accept(delta_cost, temperature):
     if delta_cost <= 0: return True
@@ -167,14 +183,28 @@ def accept(delta_cost, temperature):
 # ARmin, ARmax: minimum/maximum allowed aspect ratio of solution
 def simulated_annealing(Tmin, Tmax, N, alpha, S, modules, ARmin, ARmax, plot):
     assert(alpha < 1. and Tmin < Tmax)
-    temperature, current_cost = Tmax, S.costEval(modules)
+    temperature, current_cost = Tmax, S.costEval(modules, ARmin, ARmax)
     min_cost, min_solution = current_cost, S
     cost_history, temp_history = [], []
+    
+    # Track best solution that satisfies aspect ratio constraints
+    best_valid_cost = float('inf')
+    best_valid_solution = None
     
     while temperature > Tmin:
         for _ in range(N):
             new_solution = S.perturb(modules)
-            new_cost = new_solution.costEval(modules)
+            new_cost = new_solution.costEval(modules, ARmin, ARmax)
+            
+            # Calculate aspect ratio
+            aspect_ratio = new_solution._bounding_box_width / new_solution._bounding_box_height
+            
+            # Check if this solution is valid (within aspect ratio constraints)
+            if ARmin <= aspect_ratio <= ARmax:
+                # Solution is valid, check if it's the best valid solution so far
+                if new_cost < best_valid_cost:
+                    best_valid_cost = new_cost
+                    best_valid_solution = new_solution
             
             if accept(new_cost - current_cost, temperature):
                 current_cost, S = new_cost, new_solution
@@ -189,8 +219,18 @@ def simulated_annealing(Tmin, Tmax, N, alpha, S, modules, ARmin, ARmax, plot):
         plt.plot(temp_history, cost_history)
         plt.xlim(max(temp_history), min(temp_history))
         plt.xscale('log')
-        
-    return min_solution, min_cost
+    
+    # If we found a valid solution, return it, otherwise return the best solution found
+    if best_valid_solution is not None:
+        return best_valid_solution, best_valid_cost
+    else:
+        # Check if the best solution is valid
+        aspect_ratio = min_solution._bounding_box_width / min_solution._bounding_box_height
+        if ARmin <= aspect_ratio <= ARmax:
+            return min_solution, min_cost
+        else:
+            print(f"I'm just a script, not a magician -,-\nSomething is better than nothing :)\nBest ratio: {aspect_ratio:.2f}")
+            return min_solution, min_cost
 
 def sp_floorplan(modules, ARmin, ARmax):
     initial_seq_pair = SeqPair(modules)
@@ -201,38 +241,38 @@ def sp_floorplan(modules, ARmin, ARmax):
                for mod_idx in range(len(modules))]
     return (solution, min_area)
 
-# # Uncomment all the lines below including this one to enable manual testing
-# # =========================================================================
+# Uncomment all the lines below including this one to enable manual testing
+# =========================================================================
 
-# def plot(coords):
-#     import matplotlib.pyplot as plt
-#     from matplotlib.patches import Rectangle
-#     fig, ax = plt.subplots()
-#     ax.plot([0, 0])
-#     ax.set_aspect('equal')
-#     ax.set_xlim(0,max([rect[0][0] + rect[1][0] for rect in coords]))
-#     ax.set_ylim(0,max([rect[0][1] + rect[1][1] for rect in coords]))
-#     for idx, rect in enumerate(coords):
-#         if idx%4 == 3:
-#             hatch_pattern, color = '/+', 'red'
-#         elif idx%4 == 2:
-#             hatch_pattern, color = '///', 'green'
-#         elif idx%4 == 1:
-#             hatch_pattern, color = '\\\\\\', 'blue'
-#         else:
-#             hatch_pattern, color = 'o', 'black'
-#         ax.add_patch(Rectangle(rect[0], rect[1][0], rect[1][1], hatch=hatch_pattern, facecolor='white', fill=True, 
-#                             edgecolor=color, linewidth=3, label=rect[2]))
-#         ax.text(rect[0][0]+rect[1][0]/2, rect[0][1]+rect[1][1]/2, rect[2])
-#     plt.show()
-#     return (fig, ax)
+def plot(coords):
+    import matplotlib.pyplot as plt
+    from matplotlib.patches import Rectangle
+    fig, ax = plt.subplots()
+    ax.plot([0, 0])
+    ax.set_aspect('equal')
+    ax.set_xlim(0,max([rect[0][0] + rect[1][0] for rect in coords]))
+    ax.set_ylim(0,max([rect[0][1] + rect[1][1] for rect in coords]))
+    for idx, rect in enumerate(coords):
+        if idx%4 == 3:
+            hatch_pattern, color = '/+', 'red'
+        elif idx%4 == 2:
+            hatch_pattern, color = '///', 'green'
+        elif idx%4 == 1:
+            hatch_pattern, color = '\\\\\\', 'blue'
+        else:
+            hatch_pattern, color = 'o', 'black'
+        ax.add_patch(Rectangle(rect[0], rect[1][0], rect[1][1], hatch=hatch_pattern, facecolor='white', fill=True, 
+                            edgecolor=color, linewidth=3, label=rect[2]))
+        ax.text(rect[0][0]+rect[1][0]/2, rect[0][1]+rect[1][1]/2, rect[2])
+    plt.show()
+    return (fig, ax)
 
-# modules = [Module('a', 16, [0.25, 4]), Module('b', 32, [2.0, 0.5]), Module('c', 27, [1./3, 3.]), Module('d', 6, [6])]
-# solution, area = sp_floorplan(modules, 0.75, 1.33)
+# modules = [Module('carry', 5, [5]), Module('carry_n', 4, [4]), Module('sum', 3, [3]), Module('sum_n', 2, [2])]*4
+# solution, area = sp_floorplan(modules, 0.9, 1.1)
 # print(f'Solution: {solution}, Area: {area}')
 # plot(solution)
 
-# modules = [Module(str(i), random.randint(10,100), [1.]) for i in range(10)]
-# solution, area = sp_floorplan(modules, 0.5, 2)
-# print(f'Solution: {solution}, Area: {area}')
-# plot(solution)
+modules = [Module(str(i), random.randint(10,100), [1.]) for i in range(10)]
+solution, area = sp_floorplan(modules, 0.5, 2)
+print(f'Solution: {solution}, Area: {area}')
+plot(solution)
