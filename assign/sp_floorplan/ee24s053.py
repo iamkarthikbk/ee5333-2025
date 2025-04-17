@@ -267,12 +267,12 @@ def plot(coords):
     plt.show()
     return (fig, ax)
 
-# modules = [Module('carry', 5, [5]), Module('carry_n', 4, [4]), Module('sum', 3, [3]), Module('sum_n', 2, [2])]*4
-# solution, area = sp_floorplan(modules, 0.9, 1.1)
-# print(f'Solution: {solution}, Area: {area}')
-# plot(solution)
-
-modules = [Module(str(i), random.randint(10,100), [1.]) for i in range(10)]
-solution, area = sp_floorplan(modules, 0.5, 2)
+modules = [Module('sum_n', 4.92/2.72, [4.92/2.72]), Module('carry_n', 9.83/2.72, [9.83/2.72])]*8 + [Module('inv', 0.83/2.72, [0.83/2.72])]*16
+solution, area = sp_floorplan(modules, 0.9, 1.1)
 print(f'Solution: {solution}, Area: {area}')
 plot(solution)
+
+# modules = [Module(str(i), random.randint(10,100), [1.]) for i in range(10)]
+# solution, area = sp_floorplan(modules, 0.5, 2)
+# print(f'Solution: {solution}, Area: {area}')
+# plot(solution)
