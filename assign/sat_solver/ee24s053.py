@@ -243,4 +243,7 @@ if __name__ == '__main__':
     numvars, clauses = loadCNFFile(args.cnf)
     m = [None for i in range(numvars + 1)]
     ret, m = (dpll(clauses, m))
-    print([(i if m[i] == True else -i) for i in range(1, len(m))])
+    if m is None:
+        print("UNSAT")
+    else:
+        print([(i if m[i] == True else -i) for i in range(1, len(m))])
