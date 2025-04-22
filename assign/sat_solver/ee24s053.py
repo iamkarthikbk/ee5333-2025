@@ -246,4 +246,4 @@ if __name__ == '__main__':
     if m is None:
         print("UNSAT")
     else:
-        print([(i if m[i] == True else -i) for i in range(1, len(m))])
+      print([(i if m[i] == True else -i) for i in range(1, len(m))])
