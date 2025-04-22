@@ -242,7 +242,7 @@ for v in Vertices:
     if nbr._nbrs is None: nbr._nbrs = list()
     v._nbrs.append(nbr)
     nbr._nbrs.append(v)
-for alg in [dijkstra, astar]:
+for alg in [astar]:
   src = Vertices[0]
   tgt = Vertices[-1]
   t = time.time()
@@ -260,7 +260,7 @@ for v in Vertices_large:
       nbr._nbrs = list()
     v._nbrs.append(nbr)
     nbr._nbrs.append(v)
-for alg in [dijkstra, astar]:
+for alg in [astar]:
   src = Vertices_large[0]
   tgt = Vertices_large[-1]
   t = time.time()
