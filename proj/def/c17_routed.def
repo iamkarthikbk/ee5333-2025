@@ -1,0 +1,218 @@
+VERSION 5.8 ;
+DIVIDERCHAR "/" ;
+BUSBITCHARS "[]" ;
+DESIGN c17 ;
+UNITS DISTANCE MICRONS 1000 ;
+DIEAREA ( 0 0 ) ( 30700 41420 ) ;
+COMPONENTS 35 ;
+   - PHY_EDGE_ROW_0_Left_7 sky130_fd_sc_hd__decap_3 
+      + PLACED ( 5520 10880 ) N ;
+   - PHY_EDGE_ROW_0_Right_0 sky130_fd_sc_hd__decap_3 
+      + PLACED ( 23460 10880 ) FN ;
+   - PHY_EDGE_ROW_1_Left_8 sky130_fd_sc_hd__decap_3 
+      + PLACED ( 5520 13600 ) FS ;
+   - PHY_EDGE_ROW_1_Right_1 sky130_fd_sc_hd__decap_3 
+      + PLACED ( 23460 13600 ) S ;
+   - PHY_EDGE_ROW_2_Left_9 sky130_fd_sc_hd__decap_3 
+      + PLACED ( 5520 16320 ) N ;
+   - PHY_EDGE_ROW_2_Right_2 sky130_fd_sc_hd__decap_3 
+      + PLACED ( 23460 16320 ) FN ;
+   - PHY_EDGE_ROW_3_Left_10 sky130_fd_sc_hd__decap_3 
+      + PLACED ( 5520 19040 ) FS ;
+   - PHY_EDGE_ROW_3_Right_3 sky130_fd_sc_hd__decap_3 
+      + PLACED ( 23460 19040 ) S ;
+   - PHY_EDGE_ROW_4_Left_11 sky130_fd_sc_hd__decap_3 
+      + PLACED ( 5520 21760 ) N ;
+   - PHY_EDGE_ROW_4_Right_4 sky130_fd_sc_hd__decap_3 
+      + PLACED ( 23460 21760 ) FN ;
+   - PHY_EDGE_ROW_5_Left_12 sky130_fd_sc_hd__decap_3 
+      + PLACED ( 5520 24480 ) FS ;
+   - PHY_EDGE_ROW_5_Right_5 sky130_fd_sc_hd__decap_3 
+      + PLACED ( 23460 24480 ) S ;
+   - PHY_EDGE_ROW_6_Left_13 sky130_fd_sc_hd__decap_3 
+      + PLACED ( 5520 27200 ) N ;
+   - PHY_EDGE_ROW_6_Right_6 sky130_fd_sc_hd__decap_3 
+      + PLACED ( 23460 27200 ) FN ;
+   - TAP_TAPCELL_ROW_0_14 sky130_fd_sc_hd__tapvpwrvgnd_1 
+      + PLACED ( 18400 10880 ) N ;
+   - TAP_TAPCELL_ROW_2_15 sky130_fd_sc_hd__tapvpwrvgnd_1 
+      + PLACED ( 18400 16320 ) N ;
+   - TAP_TAPCELL_ROW_4_16 sky130_fd_sc_hd__tapvpwrvgnd_1 
+      + PLACED ( 18400 21760 ) N ;
+   - TAP_TAPCELL_ROW_6_17 sky130_fd_sc_hd__tapvpwrvgnd_1 
+      + PLACED ( 18400 27200 ) N ;
+   - _01_ sky130_fd_sc_hd__nand2_1 
+      + PLACED ( 18860 24480 ) S ;
+   - _02_ sky130_fd_sc_hd__a22o_1 
+      + PLACED ( 15640 24480 ) S ;
+   - _03_ sky130_fd_sc_hd__o21a_1 
+      + PLACED ( 18860 21760 ) FN ;
+   - _04_ sky130_fd_sc_hd__dfxtp_1 
+      + PLACED ( 14260 13600 ) FS ;
+   - _05_ sky130_fd_sc_hd__dfxtp_1 
+      + PLACED ( 8280 24480 ) FS ;
+   - _06_ sky130_fd_sc_hd__dfxtp_1 
+      + PLACED ( 11040 21760 ) N ;
+   - _07_ sky130_fd_sc_hd__dfxtp_1 
+      + PLACED ( 13800 19040 ) S ;
+   - _08_ sky130_fd_sc_hd__dfxtp_1 
+      + PLACED ( 6900 13600 ) FS ;
+   - _09_ sky130_fd_sc_hd__dfxtp_1 
+      + PLACED ( 8280 16320 ) N ;
+   - _10_ sky130_fd_sc_hd__dfxtp_1 
+      + PLACED ( 10120 10880 ) FN ;
+   - input1 sky130_fd_sc_hd__clkbuf_1 
+      + PLACED ( 6900 27200 ) FN ;
+   - input2 sky130_fd_sc_hd__clkbuf_1 
+      + PLACED ( 15640 27200 ) N ;
+   - input3 sky130_fd_sc_hd__clkbuf_1 
+      + PLACED ( 22080 27200 ) N ;
+   - input4 sky130_fd_sc_hd__clkbuf_1 
+      + PLACED ( 6900 16320 ) FN ;
+   - input5 sky130_fd_sc_hd__clkbuf_1 
+      + PLACED ( 8280 27200 ) FN ;
+   - output6 sky130_fd_sc_hd__buf_1 
+      + PLACED ( 7820 10880 ) FN ;
+   - output7 sky130_fd_sc_hd__buf_1 
+      + PLACED ( 22080 10880 ) N ;
+END COMPONENTS
+
+PINS 10 ;
+   - N1_d + NET N1_d
+      + DIRECTION INPUT
+      + USE SIGNAL ;
+   - N22 + NET N22
+      + DIRECTION OUTPUT
+      + USE SIGNAL ;
+   - N23 + NET N23
+      + DIRECTION OUTPUT
+      + USE SIGNAL ;
+   - N2_d + NET N2_d
+      + DIRECTION INPUT
+      + USE SIGNAL ;
+   - N3_d + NET N3_d
+      + DIRECTION INPUT
+      + USE SIGNAL ;
+   - N6_d + NET N6_d
+      + DIRECTION INPUT
+      + USE SIGNAL ;
+   - N7_d + NET N7_d
+      + DIRECTION INPUT
+      + USE SIGNAL ;
+   - VGND + NET VGND
+      + DIRECTION INOUT
+      + USE GROUND ;
+   - VPWR + NET VPWR
+      + DIRECTION INOUT
+      + USE POWER ;
+   - clk + NET clk
+      + DIRECTION INPUT
+      + USE SIGNAL ;
+END PINS
+
+NETS 23 ;
+   - N1 ( _05_ Q )  ( _02_ A2 ) 
+      + ROUTED li1 ( 15325 25330 ) ( 15495 26690 )
+      + ROUTED met1 ( 15410 25940 ) ( 16790 26080 ) ;
+   - N1_d ( PIN N1_d )  ( input1 A ) 
+      + ROUTED met1 ( 5290 28320 ) ( 7130 28460 )
+      + ROUTED met2 ( 5220 28390 ) ( 5360 39100 ) ;
+   - N2 ( _06_ Q )  ( _03_ A1 )  ( _02_ B2 ) 
+      + ROUTED li1 ( 18085 22270 ) ( 18255 23970 )
+      + ROUTED li1 ( 19005 22950 ) ( 19175 23290 )
+      + ROUTED met1 ( 18170 22880 ) ( 19090 23020 )
+      + ROUTED met1 ( 18170 23900 ) ( 20470 24040 )
+      + ROUTED met2 ( 20400 23970 ) ( 20540 26010 ) ;
+   - N22 ( PIN N22 )  ( output6 X ) 
+      + ROUTED li1 ( 7965 11390 ) ( 8135 12750 )
+      + ROUTED met1 ( 7590 11320 ) ( 8050 11460 )
+      + ROUTED met2 ( 7520 1700 ) ( 7660 11390 ) ;
+   - N22_d ( _10_ D )  ( _02_ X ) 
+      + ROUTED li1 ( 15785 24990 ) ( 15955 26690 )
+      + ROUTED met2 ( 15800 12070 ) ( 15940 24990 ) ;
+   - N23 ( PIN N23 )  ( output7 X ) 
+      + ROUTED li1 ( 23145 11390 ) ( 23315 12750 )
+      + ROUTED met1 ( 22770 11320 ) ( 23230 11460 )
+      + ROUTED met2 ( 22700 1700 ) ( 22840 11390 ) ;
+   - N23_d ( _04_ D )  ( _03_ X ) 
+      + ROUTED li1 ( 15785 15130 ) ( 15955 15470 )
+      + ROUTED li1 ( 21305 22270 ) ( 21475 23630 )
+      + ROUTED met1 ( 15870 15400 ) ( 20470 15540 )
+      + ROUTED met1 ( 20470 22200 ) ( 21390 22340 )
+      + ROUTED met2 ( 20400 15470 ) ( 20540 22270 ) ;
+   - N2_d ( PIN N2_d )  ( input2 A ) 
+      + ROUTED met1 ( 15410 28320 ) ( 16790 28460 )
+      + ROUTED met2 ( 15340 28390 ) ( 15480 39100 ) ;
+   - N3 ( _07_ Q )  ( _02_ A1 )  ( _01_ B ) 
+      + ROUTED li1 ( 13945 19890 ) ( 14115 21250 )
+      + ROUTED li1 ( 17165 26010 ) ( 17335 26350 )
+      + ROUTED met1 ( 14030 21180 ) ( 17250 21320 )
+      + ROUTED met1 ( 17250 25940 ) ( 20010 26080 )
+      + ROUTED met2 ( 17180 21250 ) ( 17320 26010 ) ;
+   - N3_d ( PIN N3_d )  ( input3 A ) 
+      + ROUTED met1 ( 23230 28320 ) ( 25530 28460 )
+      + ROUTED met2 ( 25460 28390 ) ( 25600 39100 ) ;
+   - N6 ( _08_ Q )  ( _01_ A ) 
+      + ROUTED li1 ( 13945 14450 ) ( 14115 15810 )
+      + ROUTED met1 ( 14030 15740 ) ( 19090 15880 )
+      + ROUTED met2 ( 19020 15810 ) ( 19160 26010 ) ;
+   - N6_d ( PIN N6_d )  ( input4 A ) 
+      + ROUTED met1 ( 7130 17440 ) ( 14030 17580 )
+      + ROUTED met2 ( 13960 9860 ) ( 14100 17510 )
+      + ROUTED met3 ( 2300 9710 ) ( 14030 10010 ) ;
+   - N7 ( _09_ Q )  ( _03_ A2 ) 
+      + ROUTED li1 ( 15325 16830 ) ( 15495 18530 )
+      + ROUTED li1 ( 19465 22950 ) ( 19635 23630 )
+      + ROUTED met1 ( 15410 18460 ) ( 19550 18600 )
+      + ROUTED met2 ( 19480 18530 ) ( 19620 22950 ) ;
+   - N7_d ( PIN N7_d )  ( input5 A ) 
+      + ROUTED li1 ( 9805 28390 ) ( 9975 28730 )
+      + ROUTED met1 ( 8510 28320 ) ( 9890 28460 )
+      + ROUTED met1 ( 6670 28660 ) ( 9890 28800 )
+      + ROUTED met2 ( 6600 28730 ) ( 6740 30260 )
+      + ROUTED met3 ( 2070 30110 ) ( 6670 30410 ) ;
+   - _00_ ( _03_ B1 )  ( _02_ B1 )  ( _01_ Y ) 
+      + ROUTED li1 ( 19005 26350 ) ( 19175 26690 )
+      + ROUTED li1 ( 19465 25330 ) ( 19635 26690 )
+      + ROUTED met1 ( 20010 22880 ) ( 20470 23020 )
+      + ROUTED met1 ( 19550 25260 ) ( 20010 25400 )
+      + ROUTED met1 ( 17710 26280 ) ( 19090 26420 )
+      + ROUTED met1 ( 19090 26620 ) ( 19550 26760 )
+      + ROUTED met2 ( 19940 22950 ) ( 20080 25330 ) ;
+   - clk ( PIN clk )  ( _10_ CLK )  ( _09_ CLK ) 
+ ( _08_ CLK )  ( _07_ CLK )  ( _06_ CLK )  ( _05_ CLK ) 
+ ( _04_ CLK )  ;
+   - net1 ( input1 X )  ( _05_ D ) 
+      + ROUTED li1 ( 7965 27710 ) ( 8135 29070 )
+      + ROUTED met1 ( 8970 25940 ) ( 9890 26080 )
+      + ROUTED met1 ( 8050 27640 ) ( 8970 27780 )
+      + ROUTED met2 ( 8900 26010 ) ( 9040 27710 ) ;
+   - net2 ( input2 X )  ( _06_ D ) 
+      + ROUTED li1 ( 15785 27710 ) ( 15955 29070 )
+      + ROUTED met1 ( 12650 22880 ) ( 14030 23020 )
+      + ROUTED met1 ( 14030 27640 ) ( 15870 27780 )
+      + ROUTED met2 ( 13960 22950 ) ( 14100 27710 ) ;
+   - net3 ( input3 X )  ( _07_ D ) 
+      + ROUTED li1 ( 22225 27710 ) ( 22395 29070 )
+      + ROUTED met1 ( 19550 20500 ) ( 20930 20640 )
+      + ROUTED met1 ( 20930 27640 ) ( 22310 27780 )
+      + ROUTED met2 ( 20860 20570 ) ( 21000 27710 ) ;
+   - net4 ( input4 X )  ( _08_ D ) 
+      + ROUTED li1 ( 7965 16830 ) ( 8135 18190 )
+      + ROUTED met1 ( 8050 16760 ) ( 8510 16900 )
+      + ROUTED met2 ( 8440 15130 ) ( 8580 16830 ) ;
+   - net5 ( input5 X )  ( _09_ D ) 
+      + ROUTED li1 ( 9345 27710 ) ( 9515 29070 )
+      + ROUTED met1 ( 9430 27640 ) ( 9890 27780 )
+      + ROUTED met2 ( 9820 17170 ) ( 9960 27710 ) ;
+   - net6 ( output6 A )  ( _10_ Q ) 
+      + ROUTED li1 ( 10265 11390 ) ( 10435 12750 )
+      + ROUTED met1 ( 8970 12000 ) ( 10350 12140 ) ;
+   - net7 ( output7 A )  ( _04_ Q ) 
+      + ROUTED li1 ( 21305 14450 ) ( 21475 15810 )
+      + ROUTED met1 ( 21390 12000 ) ( 22310 12140 )
+      + ROUTED met2 ( 21320 12070 ) ( 21460 14450 ) ;
+END NETS
+
+END DESIGN
+

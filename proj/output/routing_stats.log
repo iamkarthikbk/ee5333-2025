@@ -1,0 +1,30 @@
+Routing Statistics - Sat May 17 23:46:58 IST 2025
+----------------------------------------
+
+add5 Statistics:
+Router execution time: 26 seconds
+Total number of spacing violations : 64
+Total number of nets : 60
+Total number of open nets : 35
+----------------------------------------
+
+c17 Statistics:
+Router execution time: 4 seconds
+Total number of spacing violations : 21
+Total number of nets : 22
+Total number of open nets : 7
+----------------------------------------
+
+c432 Statistics:
+Router execution time: 386 seconds
+Total number of spacing violations : 152
+Total number of nets : 197
+Total number of open nets : 129
+----------------------------------------
+
+c499 Statistics:
+Router execution time: 5318 seconds
+Total number of spacing violations : 510
+Total number of nets : 362
+Total number of open nets : 220
+----------------------------------------
