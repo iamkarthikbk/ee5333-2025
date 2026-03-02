@@ -25,3 +25,5 @@ Course Instructor: Prof. Ramprasath S <<ramprasath@ee.iitm.ac.in>>
 Assignment: Implement a DRC checker for a given set of rules)
 Programming assignments will be in Python/C/C++.
 Prerequisite: Rudimentary programming experience in either Python/C/C++
+
+Professor's GitHub: https://github.com/srini229/EE5333_tutorials
